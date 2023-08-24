@@ -2,7 +2,7 @@
 // @name         Boss直聘高亮未沟通, 隐藏已沟通
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
+// @description  一个油猴脚本, 将Boss直聘的未沟通岗位高亮, 同时可选隐藏已沟通岗位, 方便各位海投
 // @author       cuicuiV5
 // @match        https://www.zhipin.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=zhipin.com
@@ -63,8 +63,8 @@
             init();
         });
     };
-    setTimeout(init, 1000);
-    setTimeout(insertDom, 1000);
+    setTimeout(init, 2000);
+    setTimeout(insertDom, 2000);
     // 每隔一段时间检查一次URL变化
-    setInterval(checkURLChange, 1000); // 每秒检查一次
+    setInterval(checkURLChange, 2000); // 每秒检查一次
 })();
