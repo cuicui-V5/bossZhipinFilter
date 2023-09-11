@@ -41,7 +41,7 @@
         if (currentURL !== previousURL) {
             // URL发生了变化
             console.log("URL发生了变化:", currentURL);
-            init();
+            setTimeout(init, 2000);
             previousURL = currentURL; // 更新previousURL
         }
     };
