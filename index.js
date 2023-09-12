@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Boss直聘高亮未沟通, 隐藏已沟通
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  一个油猴脚本, 将Boss直聘的未沟通岗位高亮, 同时可选隐藏已沟通岗位, 方便各位海投
 // @author       cuicuiV5
 // @match        https://www.zhipin.com/*
@@ -46,7 +46,7 @@
         if (currentURL !== previousURL) {
             // URL发生了变化
             console.log("URL发生了变化:", currentURL);
-            setTimeout(init, 500);
+            setTimeout(init, 600);
             previousURL = currentURL; // 更新previousURL
         }
     };
@@ -72,8 +72,8 @@
         });
     };
 
-    setTimeout(init, 600);
-    setTimeout(insertDom, 600);
+    setTimeout(init, 1000);
+    setTimeout(insertDom, 1000);
     // 每隔一段时间检查一次URL变化
-    setInterval(checkURLChange, 600); // 每秒检查一次
+    setInterval(checkURLChange, 1000); // 每秒检查一次
 })();
