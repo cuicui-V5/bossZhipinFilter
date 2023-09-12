@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Boss直聘高亮未沟通, 隐藏已沟通
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  一个油猴脚本, 将Boss直聘的未沟通岗位高亮, 同时可选隐藏已沟通岗位, 方便各位海投
 // @author       cuicuiV5
 // @match        https://www.zhipin.com/*
