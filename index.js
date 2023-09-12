@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Boss直聘高亮未沟通, 隐藏已沟通
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  一个油猴脚本, 将Boss直聘的未沟通岗位高亮, 同时可选隐藏已沟通岗位, 方便各位海投
 // @author       cuicuiV5
 // @match        https://www.zhipin.com/*
@@ -14,9 +14,14 @@
 (function () {
     "use strict";
     let previousURL = window.location.href;
+    // 获取localstorage里面的数据
+
     let cfg = {
         isHide: false,
     };
+    if (localStorage.getItem("cuicui_cfg")) {
+        cfg = JSON.parse(localStorage.getItem("cuicui_cfg"));
+    }
     const init = () => {
         // 查找类名为start-chat-btn的按钮
         const btns = document.querySelectorAll(".start-chat-btn");
@@ -57,14 +62,18 @@
         // 给复选框绑定事件
         // 先获取元素
         const checkbox = document.querySelector("#isHideChatted");
+        checkbox.checked = cfg.isHide;
         checkbox.addEventListener("click", () => {
             console.log("切换显示隐藏", checkbox.checked);
             cfg.isHide = checkbox.checked;
+            // 写入localStorage
+            localStorage.setItem("cuicui_cfg", JSON.stringify(cfg));
             init();
         });
     };
-    setTimeout(init, 2000);
-    setTimeout(insertDom, 2000);
+
+    setTimeout(init, 600);
+    setTimeout(insertDom, 600);
     // 每隔一段时间检查一次URL变化
-    setInterval(checkURLChange, 2000); // 每秒检查一次
+    setInterval(checkURLChange, 600); // 每秒检查一次
 })();
