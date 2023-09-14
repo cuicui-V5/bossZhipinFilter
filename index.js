@@ -19,6 +19,9 @@
     let cfg = {
         isHide: false,
     };
+    // 重试计数器
+    let retry_count = 0;
+
     if (localStorage.getItem("cuicui_cfg")) {
         cfg = JSON.parse(localStorage.getItem("cuicui_cfg"));
     }
@@ -27,8 +30,9 @@
         const btns = document.querySelectorAll(".start-chat-btn");
         console.log("成功获取到了要筛选的元素", btns);
         // 遍历这些按钮列表,查找innerText为立即沟通的按钮
-        // 如果btns的长度为零, 那么延迟再执行一次
-        if (btns.length == 0) {
+        // 如果btns的长度为零, 那么延迟再执行一次, 如果重试次数过多, 那么就不再重试
+        if (btns.length == 0 && retry_count < 10) {
+            retry_count++;
             setTimeout(init, 300);
         }
         btns.forEach(btn => {
@@ -52,6 +56,7 @@
             console.log("URL发生了变化:", currentURL);
             setTimeout(init, 300);
             previousURL = currentURL; // 更新previousURL
+            retry_count = 0;
         }
     };
 
