@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Boss直聘高亮未沟通, 隐藏已沟通
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.7
 // @description  一个油猴脚本, 将Boss直聘的未沟通岗位高亮, 同时可选隐藏已沟通岗位, 方便各位海投
 // @author       cuicuiV5
 // @match        https://www.zhipin.com/*
@@ -27,6 +27,10 @@
         const btns = document.querySelectorAll(".start-chat-btn");
         console.log("成功获取到了要筛选的元素", btns);
         // 遍历这些按钮列表,查找innerText为立即沟通的按钮
+        // 如果btns的长度为零, 那么延迟再执行一次
+        if (btns.length == 0) {
+            setTimeout(init, 300);
+        }
         btns.forEach(btn => {
             if (btn.innerHTML == "立即沟通") {
                 // 将他的父级元素的背景色更改为深色背景
@@ -46,7 +50,7 @@
         if (currentURL !== previousURL) {
             // URL发生了变化
             console.log("URL发生了变化:", currentURL);
-            setTimeout(init, 600);
+            setTimeout(init, 300);
             previousURL = currentURL; // 更新previousURL
         }
     };
@@ -72,8 +76,8 @@
         });
     };
 
-    setTimeout(init, 1000);
-    setTimeout(insertDom, 1000);
+    setTimeout(init, 300);
+    setTimeout(insertDom, 300);
     // 每隔一段时间检查一次URL变化
     setInterval(checkURLChange, 1000); // 每秒检查一次
 })();
